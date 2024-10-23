@@ -15,10 +15,27 @@ import {
 import clsx from "clsx";
 
 import { useStore } from "@/store";
+import { useEffect } from "react";
 
 export const SideBar = () => {
 	const isSideMenuOpen = useStore((state) => state.isSideMenuOpen);
 	const closeMenu = useStore((state) => state.closeSideMenu);
+
+	// todo: Sacar es useEffect a un customHook como ejercisio
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		const handleKeyDown = (event: { key: string }) => {
+			if (event.key === "Escape") {
+				closeMenu();
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, []);
 
 	return (
 		<div>
@@ -32,7 +49,7 @@ export const SideBar = () => {
 				<div
 					className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
 					onClick={closeMenu}
-					onKeyDown={() => console.log("hola")}
+					onKeyDown={closeMenu}
 				/>
 			)}
 
