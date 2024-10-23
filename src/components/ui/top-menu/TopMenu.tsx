@@ -12,7 +12,7 @@ export const TopMenu = () => {
 					<span className={`${titleFont.className} font-bold antialiased`}>
 						Tesla
 					</span>
-					<span>| shop</span>
+					<span> | shop</span>
 				</Link>
 			</div>
 
