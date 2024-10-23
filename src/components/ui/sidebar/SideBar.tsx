@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+
 import {
 	IoCloseOutline,
 	IoLogInOutline,
@@ -12,26 +12,44 @@ import {
 	IoShareOutline,
 	IoTicketOutline,
 } from "react-icons/io5";
+import clsx from "clsx";
+
+import { useStore } from "@/store";
 
 export const SideBar = () => {
+	const isSideMenuOpen = useStore((state) => state.isSideMenuOpen);
+	const closeMenu = useStore((state) => state.closeSideMenu);
+
 	return (
 		<div>
 			{/* Background black */}
-			<div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
+			{isSideMenuOpen && (
+				<div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
+			)}
 
 			{/* background Blur */}
-			<div className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm" />
+			{isSideMenuOpen && (
+				<div
+					className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+					onClick={closeMenu}
+					onKeyDown={() => console.log("hola")}
+				/>
+			)}
 
 			{/* Sidebar */}
 
 			<nav
-				// todo: Efecto de slide
-				className="fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300"
+				className={clsx(
+					"fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+					{
+						"translate-x-full": !isSideMenuOpen,
+					},
+				)}
 			>
 				<IoCloseOutline
 					size={50}
 					className="absolute top-5 right-5 cursor-pointer"
-					onClick={() => console.log("click")}
+					onClick={() => closeMenu()}
 				/>
 
 				{/* input */}
