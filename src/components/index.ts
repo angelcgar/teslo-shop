@@ -5,6 +5,7 @@ export * from "./ui/top-menu/TopMenu";
 export * from "./ui/top-menu/TopMenuButton";
 
 export * from "./product/slideshow/ProductSlideshow";
+export * from "./product/slideshow/ProductMobileSlideshow";
 
 export * from "./product/size-selector/SizeSelector";
 export * from "./product/quantity-selector/QuantitySelector";
