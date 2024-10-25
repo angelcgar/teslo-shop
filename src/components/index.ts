@@ -4,5 +4,10 @@ export * from "./ui/title/Title";
 export * from "./ui/top-menu/TopMenu";
 export * from "./ui/top-menu/TopMenuButton";
 
+export * from "./product/slideshow/ProductSlideshow";
+
+export * from "./product/size-selector/SizeSelector";
+export * from "./product/quantity-selector/QuantitySelector";
+
 export * from "./products/product-grid/productGrid";
 export * from "./products/product-grid/ProductGridItem";
