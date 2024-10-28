@@ -8,4 +8,5 @@ Esto es un E-commers
 2. Crear una copia del `.env.template` y renombrarla a `.env` y cambiar las variables de entorno
 3. Instalar dependecias `npm i`
 4. Levantar la base de datos `docker compose up -d`
-5. Cerrer proyecto `npm run dev`
+5. Correr las migraciones de Prisma `npx prisma migrate dev`
+6. Cerrer proyecto `npm run dev`
