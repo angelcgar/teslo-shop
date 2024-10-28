@@ -4,6 +4,8 @@ export * from "./ui/title/Title";
 export * from "./ui/top-menu/TopMenu";
 export * from "./ui/top-menu/TopMenuButton";
 
+export * from "./ui/footer/Footer";
+
 export * from "./product/slideshow/ProductSlideshow";
 export * from "./product/slideshow/ProductMobileSlideshow";
 
