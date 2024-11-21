@@ -6,7 +6,7 @@ import { TopMenuButton } from "./TopMenuButton";
 
 export const TopMenu = () => {
 	return (
-		<div className="flex px-5 justify-between items-center w-full">
+		<div className="flex items-center justify-between w-full px-5">
 			{/* logo */}
 			<div>
 				<Link href={"/"}>
@@ -21,20 +21,20 @@ export const TopMenu = () => {
 
 			<div className="hidden sm:block">
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-					href={"/category/men"}
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
+					href={"/gender/men"}
 				>
 					Hombres
 				</Link>
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-					href={"/category/women"}
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
+					href={"/gender/women"}
 				>
 					Mujeres
 				</Link>
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
-					href={"/category/kid"}
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
+					href={"/gender/kid"}
 				>
 					Niños
 				</Link>
@@ -47,7 +47,7 @@ export const TopMenu = () => {
 				</Link>
 				<Link href={"/cart"} className="mx-2">
 					<div className="relative">
-						<span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
+						<span className="absolute px-1 text-xs font-bold text-white bg-blue-700 rounded-full -top-2 -right-2">
 							3
 						</span>
 						<IoCartOutline className="w-5 h-5" />
