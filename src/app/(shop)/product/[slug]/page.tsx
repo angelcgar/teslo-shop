@@ -1,12 +1,16 @@
+export const revalidate = 10080;
+
+import { getProductBySlug } from '@/actions';
 import {
 	ProductMobileSlideshow,
 	ProductSlideshow,
 	QuantitySelector,
 	SizeSelector,
-} from "@/components";
-import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
+	StockLabel,
+} from '@/components';
+import { titleFont } from '@/config/fonts';
+import type { Metadata, ResolvingMetadata } from 'next';
+import { notFound } from 'next/navigation';
 
 interface Props {
 	params: {
@@ -14,9 +18,34 @@ interface Props {
 	};
 }
 
-export default function ({ params }: Props) {
+export async function generateMetadata(
+	{ params }: Props,
+	parent: ResolvingMetadata,
+): Promise<Metadata> {
+	// read route params
+	const slug = (await params).slug;
+
+	// fetch data
+	const product = await getProductBySlug(slug);
+
+	// optionally access and extend (rather than replace) parent metadata
+	// const previousImages = (await parent).openGraph?.images || [];
+
+	return {
+		title: product?.title ?? 'Producto no encontrado',
+		description: product?.description ?? '',
+		openGraph: {
+			title: product?.title ?? 'Producto no encontrado',
+			description: product?.description ?? '',
+			images: [`/products/${product?.images[1]}`],
+		},
+	};
+}
+
+export default async function ({ params }: Props) {
 	const { slug } = params;
-	const product = initialData.products.find((product) => product.slug === slug);
+	const product = await getProductBySlug(slug);
+	// console.log({ product });
 
 	if (!product) notFound();
 
@@ -42,16 +71,19 @@ export default function ({ params }: Props) {
 
 			{/* Detalle */}
 			<div className="col-span-1 px-5">
+				<StockLabel slug={product.slug} />
+
 				<h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
 					{product.title}
 				</h1>
+
 				<p className="text-lg mb-5">${product.price.toFixed(1)}</p>
 
 				{/* Selector de Tallas */}
 
 				<SizeSelector
-					selecterSize={product.sizes[1]}
-					availableSizes={product.sizes}
+					selecterSize={product.size[1]}
+					availableSizes={product.size}
 				/>
 
 				{/* Selector de Cantidades */}

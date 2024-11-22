@@ -18,6 +18,7 @@ export default async function Home({ searchParams }: Props) {
 		await getPaginatedProductsWithImages({ page });
 	console.log({ currentPage, totalPage });
 
+	// todo: refactorizar el codigo
 	const cleanProducts = products.map((p) => ({
 		id: p.id,
 		description: p.description,

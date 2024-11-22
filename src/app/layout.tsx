@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import { geistMono, geistSans } from "@/config/fonts";
+import { geistMono, geistSans } from '@/config/fonts';
 
-import "./globals.css";
+import './globals.css';
 
 export const metadata: Metadata = {
-	title: "Teslo | shop",
-	description: "Una tienda virtual de productos",
+	title: {
+		template: '%s - Teslo shop',
+		default: 'home page - Teslo shop',
+	},
+	description: 'Una tienda virtual de productos',
 };
 
 export default function RootLayout({

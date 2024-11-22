@@ -25,6 +25,7 @@ export default async function ({ params, searchParams }: Props) {
 		await getPaginatedProductsWithImages({ page, gender: gender as Gender });
 	console.log({ currentPage, totalPage });
 
+	// todo: refactorizar el codigo
 	const cleanProducts = products.map((p) => ({
 		id: p.id,
 		description: p.description,
