@@ -1,9 +1,9 @@
 export const revalidate = 60;
 
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
-import { getPaginatedProductsWithImages } from "@/actions";
-import { Pagination, ProductGrid, Title } from "@/components";
+import { getPaginatedProductsWithImages } from '@/actions';
+import { Pagination, ProductGrid, Title } from '@/components';
 
 interface Props {
 	searchParams: {
@@ -18,22 +18,8 @@ export default async function Home({ searchParams }: Props) {
 		await getPaginatedProductsWithImages({ page });
 	console.log({ currentPage, totalPage });
 
-	// todo: refactorizar el codigo
-	const cleanProducts = products.map((p) => ({
-		id: p.id,
-		description: p.description,
-		images: p.images,
-		inStock: p.inStock,
-		price: p.price,
-		sizes: p.size,
-		slug: p.slug,
-		tags: p.tags,
-		title: p.title,
-		gender: p.gender,
-	}));
-
 	if (products.length === 0) {
-		redirect("/");
+		redirect('/');
 	}
 
 	return (
@@ -41,7 +27,7 @@ export default async function Home({ searchParams }: Props) {
 			<Title title="Tienda" subTitle="Todos lo productos" className="mb-2" />
 
 			{/* todo: arreglar este error de tipado */}
-			<ProductGrid products={cleanProducts} />
+			<ProductGrid products={products} />
 
 			<Pagination totalPage={totalPage} />
 		</>

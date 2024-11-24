@@ -4,12 +4,22 @@ export interface Product {
   images: string[];
   inStock: number;
   price: number;
-  sizes: Size[];
+  size: Size[];
   slug: string;
   tags: string[];
   title: string;
   //todo type: Type;
   gender: Category;
+}
+
+export interface CartProduct {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  quantity: number;
+  size: Size;
+  image: string;
 }
 
 export type Category = "men" | "women" | "kid" | "unisex";

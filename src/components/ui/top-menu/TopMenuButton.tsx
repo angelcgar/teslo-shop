@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useStore } from "@/store";
+import { useUIStore } from '@/store';
 
 export const TopMenuButton = () => {
-	const openMenu = useStore((state) => state.openSideMenu);
+	const openMenu = useUIStore((state) => state.openSideMenu);
 
 	return (
 		<button

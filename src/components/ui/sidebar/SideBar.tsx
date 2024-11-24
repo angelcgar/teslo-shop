@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 import {
 	IoCloseOutline,
@@ -11,29 +11,29 @@ import {
 	IoSearchOutline,
 	IoShareOutline,
 	IoTicketOutline,
-} from "react-icons/io5";
-import clsx from "clsx";
+} from 'react-icons/io5';
+import clsx from 'clsx';
 
-import { useStore } from "@/store";
-import { useEffect } from "react";
+import { useUIStore } from '@/store';
+import { useEffect } from 'react';
 
 export const SideBar = () => {
-	const isSideMenuOpen = useStore((state) => state.isSideMenuOpen);
-	const closeMenu = useStore((state) => state.closeSideMenu);
+	const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen);
+	const closeMenu = useUIStore((state) => state.closeSideMenu);
 
 	// todo: Sacar es useEffect a un customHook como ejercisio
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const handleKeyDown = (event: { key: string }) => {
-			if (event.key === "Escape") {
+			if (event.key === 'Escape') {
 				closeMenu();
 			}
 		};
 
-		window.addEventListener("keydown", handleKeyDown);
+		window.addEventListener('keydown', handleKeyDown);
 
 		return () => {
-			window.removeEventListener("keydown", handleKeyDown);
+			window.removeEventListener('keydown', handleKeyDown);
 		};
 	}, []);
 
@@ -57,9 +57,9 @@ export const SideBar = () => {
 
 			<nav
 				className={clsx(
-					"fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+					'fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300',
 					{
-						"translate-x-full": !isSideMenuOpen,
+						'translate-x-full': !isSideMenuOpen,
 					},
 				)}
 			>
@@ -81,7 +81,7 @@ export const SideBar = () => {
 
 				{/* Menu */}
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoPersonOutline size={30} />
@@ -89,7 +89,7 @@ export const SideBar = () => {
 				</Link>
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoTicketOutline size={30} />
@@ -97,7 +97,7 @@ export const SideBar = () => {
 				</Link>
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoLogInOutline size={30} />
@@ -105,7 +105,7 @@ export const SideBar = () => {
 				</Link>
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoLogOutOutline size={30} />
@@ -116,7 +116,7 @@ export const SideBar = () => {
 				<div className="w-full h-px bg-gray-200 my-10" />
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoShareOutline size={30} />
@@ -124,7 +124,7 @@ export const SideBar = () => {
 				</Link>
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoTicketOutline size={30} />
@@ -132,7 +132,7 @@ export const SideBar = () => {
 				</Link>
 
 				<Link
-					href={"/"}
+					href={'/'}
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoPeopleOutline size={30} />

@@ -7,7 +7,7 @@ interface Props {
   closeSideMenu: () => void;
 }
 
-export const useStore = create<Props>()((set) => ({
+export const useUIStore = create<Props>()((set) => ({
   isSideMenuOpen: false,
 
   openSideMenu: () => set({ isSideMenuOpen: true }),
