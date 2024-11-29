@@ -1,32 +1,31 @@
 'use client';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
 import { useCartStore } from '@/store';
 import { QuantitySelector } from '@/components';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export const ProductsInCart = () => {
-	const [loaded, setLoaded] = useState(false);
-
-	const productsInCart = useCartStore((store) => store.cart);
 	const updateProductQuantity = useCartStore(
-		(store) => store.updateProductQuantity,
+		(state) => state.updateProductQuantity,
 	);
-	const removeProduct = useCartStore((store) => store.removeProduct);
+	const removeProduct = useCartStore((state) => state.removeProduct);
+
+	const [loaded, setLoaded] = useState(false);
+	const productsInCart = useCartStore((state) => state.cart);
 
 	useEffect(() => {
 		setLoaded(true);
-	}, []);
+	});
 
 	if (!loaded) {
-		return <p>Cargando...</p>;
+		return <p>Loading...</p>;
 	}
 
 	return (
 		<>
-			{/* Items */}
 			{productsInCart.map((product) => (
 				<div key={`${product.slug}-${product.size}`} className="flex mb-5">
 					<Image
@@ -43,21 +42,23 @@ export const ProductsInCart = () => {
 
 					<div>
 						<Link
-							className="cursor-pointer hover:underline"
-							href={`/product/${product.slug}`}
+							className="hover:underline cursor-pointer"
+							href={`/product/${product.slug} `}
 						>
 							{product.size} - {product.title}
 						</Link>
-						<p>{product.price}</p>
+
+						<p>${product.price}</p>
 						<QuantitySelector
 							quantity={product.quantity}
-							onQuantityChange={(quantity) =>
+							onQuantityChanged={(quantity) =>
 								updateProductQuantity(product, quantity)
 							}
 						/>
+
 						<button
 							onClick={() => removeProduct(product)}
-							className="mt-3 underline"
+							className="underline mt-3"
 							type="button"
 						>
 							Remover
