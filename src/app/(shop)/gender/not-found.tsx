@@ -1,6 +1,5 @@
-import { PageNotFound } from "@/components";
-import Link from "next/link";
+import { PageNotFound } from '@/components';
 
-export default function () {
+export default function GenderNotFoundPage() {
 	return <PageNotFound />;
 }
