@@ -5,15 +5,15 @@ import { persist } from "zustand/middleware";
 interface State {
   cart: CartProduct[];
 
-  getTotalItem: () => number;
-  getSumaryInformation: () => {
+  getTotalItems: () => number;
+  getSummaryInformation: () => {
     subTotal: number;
     tax: number;
     total: number;
     itemsInCart: number;
   };
 
-  addProductToCart: (product: CartProduct) => void;
+  addProductTocart: (product: CartProduct) => void;
   updateProductQuantity: (product: CartProduct, quantity: number) => void;
   removeProduct: (product: CartProduct) => void;
 }
@@ -23,14 +23,13 @@ export const useCartStore = create<State>()(
     (set, get) => ({
       cart: [],
 
-      // metodos
-      getTotalItem: () => {
+      // Methods
+      getTotalItems: () => {
         const { cart } = get();
-
         return cart.reduce((total, item) => total + item.quantity, 0);
       },
 
-      getSumaryInformation: () => {
+      getSummaryInformation: () => {
         const { cart } = get();
 
         const subTotal = cart.reduce(
@@ -52,10 +51,10 @@ export const useCartStore = create<State>()(
         };
       },
 
-      addProductToCart: (product: CartProduct) => {
+      addProductTocart: (product: CartProduct) => {
         const { cart } = get();
 
-        // 1. resivir si el producto existe en el carrito con la talla seleccionada
+        // 1. Revisar si el producto existe en el carrito con la talla seleccionada
         const productInCart = cart.some(
           (item) => item.id === product.id && item.size === product.size
         );
@@ -65,8 +64,8 @@ export const useCartStore = create<State>()(
           return;
         }
 
-        // 2 se que el producto existe por talla, tengo que incrementarlo
-        const updateCartProduct = cart.map((item) => {
+        // 2. Se que el producto existe por talla... tengo que incrementar
+        const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {
             return { ...item, quantity: item.quantity + product.quantity };
           }
@@ -74,34 +73,34 @@ export const useCartStore = create<State>()(
           return item;
         });
 
-        set({ cart: updateCartProduct });
+        set({ cart: updatedCartProducts });
       },
 
-      updateProductQuantity(product, quantity) {
+      updateProductQuantity: (product: CartProduct, quantity: number) => {
         const { cart } = get();
 
-        const updateCartProduct = cart.map((item) => {
+        const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {
             return { ...item, quantity: quantity };
           }
           return item;
         });
 
-        set({ cart: updateCartProduct });
+        set({ cart: updatedCartProducts });
       },
 
-      removeProduct(product) {
+      removeProduct: (product: CartProduct) => {
         const { cart } = get();
-        const updateCartProduct = cart.filter(
+        const updatedCartProducts = cart.filter(
           (item) => item.id !== product.id || item.size !== product.size
         );
 
-        set({ cart: updateCartProduct });
+        set({ cart: updatedCartProducts });
       },
     }),
 
     {
-      name: "shoping-cart",
+      name: "shopping-cart",
     }
   )
 );

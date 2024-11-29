@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-interface Props {
+interface State {
   isSideMenuOpen: boolean;
 
   openSideMenu: () => void;
   closeSideMenu: () => void;
 }
 
-export const useUIStore = create<Props>()((set) => ({
+export const useUIStore = create<State>()((set) => ({
   isSideMenuOpen: false,
 
   openSideMenu: () => set({ isSideMenuOpen: true }),

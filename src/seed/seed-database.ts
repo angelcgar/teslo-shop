@@ -1,45 +1,48 @@
+import { create } from "zustand";
 import { initialData } from "./seed";
 import prisma from "../lib/prisma";
 
 async function main() {
-  // Borrar registros previos
-  await Promise.all([
-    prisma.productImage.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
-  ]);
+  // 1. Borrar registros previos
+  // await Promise.all( [
+  await prisma.productImage.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.category.deleteMany();
+  // ]);
 
   const { categories, products } = initialData;
 
-  // categoria
-  const categoriesData = categories.map((category) => ({
-    name: category,
-  }));
+  //  Categorias
+  // {
+  //   name: 'Shirt'
+  // }
+  const categoriesData = categories.map((name) => ({ name }));
 
   await prisma.category.createMany({
     data: categoriesData,
   });
 
-  // categories
   const categoriesDB = await prisma.category.findMany();
 
   const categoriesMap = categoriesDB.reduce((map, category) => {
     map[category.name.toLowerCase()] = category.id;
     return map;
-  }, {} as Record<string, string>);
+  }, {} as Record<string, string>); //<string=shirt, string=categoryID>
 
-  // products
-  products.forEach(async (product, i) => {
-    const { type, images, sizes, ...rest } = product;
+  // Productos
+
+  // biome-ignore lint/complexity/noForEach: <explanation>
+    products.forEach(async (product) => {
+    const { type, images, ...rest } = product;
 
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        catedoryId: categoriesMap[type],
+        categoryId: categoriesMap[type],
       },
     });
 
-    // imagenes
+    // Images
     const imagesData = images.map((image) => ({
       url: image,
       productId: dbProduct.id,
@@ -50,7 +53,7 @@ async function main() {
     });
   });
 
-  console.log("Seed Ejecutado correctamente");
+  console.log("Seed ejecutado correctamente");
 }
 
 (() => {
