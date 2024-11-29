@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import type { Swiper as SwiperObject } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperObject } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
-import "./slideshow.css";
-import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
-import Image from "next/image";
+import './slideshow.css';
+import Image from 'next/image';
 
 interface Props {
 	images: string[];
 	title: string;
-	className: string;
+	className?: string;
 }
 
-export const ProductSlideshow = ({ images, className, title }: Props) => {
+export const ProductSlideshow = ({ images, title, className }: Props) => {
 	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>();
 
 	return (
@@ -28,8 +28,8 @@ export const ProductSlideshow = ({ images, className, title }: Props) => {
 			<Swiper
 				style={
 					{
-						"--swiper-navigation-color": "#fff",
-						"--swiper-pagination-color": "#fff",
+						'--swiper-navigation-color': '#fff',
+						'--swiper-pagination-color': '#fff',
 					} as React.CSSProperties
 				}
 				spaceBetween={10}
@@ -37,7 +37,9 @@ export const ProductSlideshow = ({ images, className, title }: Props) => {
 				autoplay={{
 					delay: 2500,
 				}}
-				thumbs={{ swiper: thumbsSwiper }}
+				thumbs={{
+					swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+				}}
 				modules={[FreeMode, Navigation, Thumbs, Autoplay]}
 				className="mySwiper2"
 			>
@@ -53,6 +55,7 @@ export const ProductSlideshow = ({ images, className, title }: Props) => {
 					</SwiperSlide>
 				))}
 			</Swiper>
+
 			<Swiper
 				onSwiper={setThumbsSwiper}
 				spaceBetween={10}

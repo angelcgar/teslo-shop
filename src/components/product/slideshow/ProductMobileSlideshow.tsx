@@ -1,36 +1,35 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
+import Image from 'next/image';
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules';
 
-import "./slideshow.css";
-import { Autoplay, FreeMode, Navigation, Pagination } from "swiper/modules";
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+
+import './slideshow.css';
 
 interface Props {
 	images: string[];
 	title: string;
-	className: string;
+	className?: string;
 }
 
-export const ProductMobileSlideshow = ({ images, className, title }: Props) => {
+export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
 	return (
 		<div className={className}>
 			<Swiper
 				style={{
-					width: "100vw",
-					height: "500px",
+					width: '100vw',
+					height: '500px',
 				}}
 				pagination
-				navigation={true}
 				autoplay={{
 					delay: 2500,
 				}}
-				modules={[FreeMode, Navigation, Autoplay, Pagination]}
+				modules={[FreeMode, Autoplay, Pagination]}
 				className="mySwiper2"
 			>
 				{images.map((image) => (

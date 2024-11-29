@@ -1,22 +1,18 @@
-import clsx from 'clsx';
-import React from 'react';
 import type { Size } from '@/interfaces';
+import clsx from 'clsx';
 
 interface Props {
-	selecterSize: Size;
-	availableSizes: Size[];
+	selectedSize?: Size;
+	availableSizes: Size[]; // ['SX', 'M', 'XL', 'XXL']
 
 	onSizeChanged: (size: Size) => void;
 }
 
 export const SizeSelector = ({
+	selectedSize,
 	availableSizes,
-	selecterSize,
 	onSizeChanged,
 }: Props) => {
-	// console.log('===============>');
-	// console.log(availableSizes);
-
 	return (
 		<div className="my-5">
 			<h3 className="font-bold mb-4">Tallas disponibles</h3>
@@ -25,13 +21,13 @@ export const SizeSelector = ({
 				{availableSizes.map((size) => (
 					<button
 						key={size}
-						onClick={() => onSizeChanged}
+						onClick={() => onSizeChanged(size)}
 						className={clsx('mx-2 hover:underline text-lg', {
-							underline: size === selecterSize,
+							underline: size === selectedSize,
 						})}
 						type="button"
 					>
-						asasssss
+						{size}
 					</button>
 				))}
 			</div>
