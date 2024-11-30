@@ -17,3 +17,5 @@ export * from "./product/stock-label/StockLabel";
 
 export * from "./products/product-grid/ProductGridItem";
 export * from "./products/product-grid/productGrid";
+
+export * from "./providers/Providers";

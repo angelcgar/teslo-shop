@@ -9,7 +9,7 @@ import { useCartStore, useUIStore } from '@/store';
 
 export const TopMenu = () => {
 	const openSideMenu = useUIStore((state) => state.openSideMenu);
-	const totalItemsInCart = useCartStore((state) => state.getTotalItem());
+	const totalItemsInCart = useCartStore((state) => state.getTotalItems());
 
 	const [loaded, setLoaded] = useState(false);
 
