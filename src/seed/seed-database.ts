@@ -1,21 +1,25 @@
-import { create } from "zustand";
-import { initialData } from "./seed";
 import prisma from "../lib/prisma";
+
+import { initialData } from "./seed";
+import { countries } from "./seed-countries";
 
 async function main() {
   // 1. Borrar registros previos
-  // await Promise.all( [
   await prisma.user.deleteMany();
+  await prisma.country.deleteMany();
 
   await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
-  // ]);
 
   const { categories, products, users } = initialData;
 
   await prisma.user.createMany({
     data: users,
+  });
+
+  await prisma.country.createMany({
+    data: countries,
   });
 
   //  Categorias
@@ -37,8 +41,7 @@ async function main() {
 
   // Productos
 
-  // biome-ignore lint/complexity/noForEach: <explanation>
-  products.forEach(async (product) => {
+  products.forEach(async (product, i) => {
     const { type, images, ...rest } = product;
 
     const dbProduct = await prisma.product.create({

@@ -13,9 +13,5 @@ export default async function CheckoutLayout({
 		redirect('/auth/login?=redirectTo=/checkout/address');
 	}
 
-	return (
-		<div>
-			<h1>Hello Root Layout Checkout</h1>
-		</div>
-	);
+	return <div>{children}</div>;
 }
