@@ -1,9 +1,16 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 
-import type { Country } from '@/interfaces';
+import { useAddressStore } from '@/store';
+import { deleteUserAddress, setUserAddress } from '@/actions';
+
+import type { Address, Country } from '@/interfaces';
 
 interface FormInputs {
 	firstName: string;
@@ -19,21 +26,56 @@ interface FormInputs {
 
 interface Props {
 	countries: Country[];
+	userStoreAddress: Partial<Address>;
 }
 
-export default function AddressForm({ countries }: Props) {
+export default function AddressForm({
+	countries,
+	userStoreAddress = {},
+}: Props) {
 	const {
 		handleSubmit,
 		register,
 		formState: { isValid },
+		reset,
 	} = useForm<FormInputs>({
 		defaultValues: {
-			// Leer de la bd
+			...userStoreAddress,
+			remenberAddress: true,
 		},
 	});
 
-	const onSubmit = (data: FormInputs) => {
-		console.log({ data });
+	const router = useRouter();
+
+	const { data: session } = useSession({ required: true });
+
+	const setAddress = useAddressStore((state) => state.setAddress);
+	const address = useAddressStore((state) => state.address);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (address.firstName) {
+			reset(address);
+		}
+	}, []);
+
+	// todo: controlar este error
+	// if (!session?.user.id) await sleep(1);
+
+	const onSubmit = async (data: FormInputs) => {
+		// console.log({ data });
+
+		setAddress(data);
+
+		const { remenberAddress, ...restAddress } = data;
+
+		if (data.remenberAddress) {
+			await setUserAddress(restAddress, session?.user.id ?? '');
+		} else {
+			await deleteUserAddress(session?.user.id ?? '');
+		}
+
+		router.push('/checkout');
 	};
 
 	return (
