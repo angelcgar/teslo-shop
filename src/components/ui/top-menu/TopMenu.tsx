@@ -18,7 +18,7 @@ export const TopMenu = () => {
 	}, []);
 
 	return (
-		<nav className="flex px-5 justify-between items-center w-full">
+		<nav className="flex items-center justify-between w-full px-5">
 			{/* Logo */}
 			<div>
 				<Link href="/">
@@ -32,19 +32,19 @@ export const TopMenu = () => {
 			{/* Center Menu */}
 			<div className="hidden sm:block">
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
 					href="/gender/men"
 				>
 					Hombres
 				</Link>
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
 					href="/gender/women"
 				>
 					Mujeres
 				</Link>
 				<Link
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
 					href="/gender/kid"
 				>
 					Niños
@@ -63,7 +63,7 @@ export const TopMenu = () => {
 				>
 					<div className="relative">
 						{loaded && totalItemsInCart > 0 && (
-							<span className="absolute text-xs px-1 rounded-full font-bold -top-2 -right-2 bg-blue-700 text-white">
+							<span className="absolute px-1 text-xs font-bold text-white bg-blue-700 rounded-full -top-2 -right-2">
 								{totalItemsInCart}
 							</span>
 						)}
@@ -73,7 +73,7 @@ export const TopMenu = () => {
 
 				<button
 					onClick={openSideMenu}
-					className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+					className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
 					type="button"
 				>
 					Menú

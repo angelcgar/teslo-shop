@@ -8,7 +8,7 @@ export const TopMenuButton = () => {
 	return (
 		<button
 			onClick={() => openMenu()}
-			className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+			className="p-2 m-2 transition-all rounded-md hover:bg-gray-100"
 			type="button"
 		>
 			Menu
