@@ -21,7 +21,7 @@ interface FormInputs {
 	city: string;
 	country: string;
 	phone: string;
-	remenberAddress: boolean;
+	rememberAddress: boolean;
 }
 
 interface Props {
@@ -41,7 +41,7 @@ export default function AddressForm({
 	} = useForm<FormInputs>({
 		defaultValues: {
 			...userStoreAddress,
-			remenberAddress: true,
+			rememberAddress: true,
 		},
 	});
 
@@ -65,11 +65,11 @@ export default function AddressForm({
 	const onSubmit = async (data: FormInputs) => {
 		// console.log({ data });
 
-		setAddress(data);
+		const { rememberAddress, ...restAddress } = data;
 
-		const { remenberAddress, ...restAddress } = data;
+		setAddress(restAddress);
 
-		if (data.remenberAddress) {
+		if (rememberAddress) {
 			await setUserAddress(restAddress, session?.user.id ?? '');
 		} else {
 			await deleteUserAddress(session?.user.id ?? '');
@@ -174,7 +174,7 @@ export default function AddressForm({
 							type="checkbox"
 							className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-500 checked:bg-blue-500 checked:before:bg-blue-500 hover:before:opacity-10 border-gray-500"
 							id="checkbox"
-							{...register('remenberAddress')}
+							{...register('rememberAddress')}
 							// checked
 						/>
 						<div className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
