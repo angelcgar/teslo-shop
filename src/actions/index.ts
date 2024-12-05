@@ -12,6 +12,9 @@ export * from "./order/place-order";
 export * from "./order/get-order.by-user";
 export * from "./order/get-order-by-id";
 
+export * from "./payments/set-transaction-id";
+export * from "./payments/paypal-check-payment";
+
 export * from "./product/product-pagination";
 export * from "./product/get-product-by-slug";
 export * from "./product/get-stock-by-slug";

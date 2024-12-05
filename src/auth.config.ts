@@ -31,7 +31,7 @@ export const authConfig: NextAuthConfig = {
       return token;
     },
     session({ session, token, user }) {
-      console.log({ session, token, user });
+      // console.log({ session, token, user });
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       session.user = token.data as any;
       return session;
