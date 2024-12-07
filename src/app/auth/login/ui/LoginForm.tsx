@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+// import { useFormState } from 'react-dom';
 
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
@@ -12,20 +13,20 @@ import { authenticate } from '@/actions';
 
 export const LoginForm = () => {
 	// const router = useRouter();
-	const [state, dispatch] = useFormState(authenticate, undefined);
+	// const [state, dispatch] = useFormState(authenticate, undefined);
 
-	console.log(state);
+	// console.log(state);
 
-	useEffect(() => {
-		if (state === 'Success') {
-			// redireccionar
-			// router.replace('/');
-			window.location.replace('/');
-		}
-	}, [state]);
+	// useEffect(() => {
+	// 	if (state === 'Success') {
+	// 		// redireccionar
+	// 		// router.replace('/');
+	// 		window.location.replace('/');
+	// 	}
+	// }, [state]);
 
 	return (
-		<form action={dispatch} className="flex flex-col">
+		<form className="flex flex-col">
 			<label htmlFor="email">Correo electrónico</label>
 			<input
 				className="px-5 py-2 mb-5 bg-gray-200 border rounded"
@@ -45,14 +46,12 @@ export const LoginForm = () => {
 				aria-live="polite"
 				aria-atomic="true"
 			>
-				{state === 'CredentialsSignin' && (
-					<div className="flex flex-row mb-2">
-						<IoInformationOutline className="w-5 h-5 text-red-500" />
-						<p className="text-sm text-red-500">
-							Credenciales no son correctas
-						</p>
-					</div>
-				)}
+				{/* {state === 'CredentialsSignin' && ( */}
+				<div className="flex flex-row mb-2">
+					<IoInformationOutline className="w-5 h-5 text-red-500" />
+					<p className="text-sm text-red-500">Credenciales no son correctas</p>
+				</div>
+				{/* )} */}
 			</div>
 
 			<LoginButton />
