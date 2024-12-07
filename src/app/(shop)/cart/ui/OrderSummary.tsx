@@ -18,12 +18,11 @@ export const OrderSummary = () => {
 		setLoaded(true);
 	}, []);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (itemsInCart === 0 && loaded === true) {
 			router.replace('/empty');
 		}
-	}, [itemsInCart, loaded]);
+	}, [itemsInCart, loaded, router]);
 
 	if (!loaded) return <p>Loading...</p>;
 

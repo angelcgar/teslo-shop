@@ -52,12 +52,11 @@ export default function AddressForm({
 	const setAddress = useAddressStore((state) => state.setAddress);
 	const address = useAddressStore((state) => state.address);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (address.firstName) {
 			reset(address);
 		}
-	}, []);
+	}, [address, reset]);
 
 	// todo: controlar este error
 	// if (!session?.user.id) await sleep(1);

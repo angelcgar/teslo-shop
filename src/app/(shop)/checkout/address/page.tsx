@@ -20,7 +20,7 @@ export default async function AddressPage() {
 			<div className="w-full  xl:w-[1000px] flex flex-col justify-center text-left">
 				<Title title="Dirección" subtitle="Dirección de entrega" />
 
-				<AddressForm countries={countries} userStoreAddress={userAddress} />
+				<AddressForm countries={countries} userStoreAddress={userAddress!} />
 			</div>
 		</div>
 	);
