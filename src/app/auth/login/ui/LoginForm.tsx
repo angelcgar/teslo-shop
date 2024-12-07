@@ -1,15 +1,17 @@
 'use client';
 
-import { authenticate } from '@/actions';
-import clsx from 'clsx';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
+
+import Link from 'next/link';
+// import { useRouter } from 'next/navigation';
 import { IoInformationOutline } from 'react-icons/io5';
+import clsx from 'clsx';
+
+import { authenticate } from '@/actions';
 
 export const LoginForm = () => {
-	const router = useRouter();
+	// const router = useRouter();
 	const [state, dispach] = useFormState(authenticate, undefined);
 
 	useEffect(() => {
