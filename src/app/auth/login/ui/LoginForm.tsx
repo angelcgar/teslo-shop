@@ -45,7 +45,7 @@ export const LoginForm = () => {
 				aria-live="polite"
 				aria-atomic="true"
 			>
-				{state === 'Invalid credentials.' && (
+				{state === 'CredentialsSignin' && (
 					<div className="flex flex-row mb-2">
 						<IoInformationOutline className="w-5 h-5 text-red-500" />
 						<p className="text-sm text-red-500">

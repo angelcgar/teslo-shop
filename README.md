@@ -1,4 +1,25 @@
+# Leer
+
+Este proyecto lo marcare como desactualizado y no para produccion, ojo el curso
+de FH NextJs me a parecido genial
+
 ## Descripcion
+
+## Bugs
+
+no se por que vercel falla, en local si funcionaaaaaaaaaa!!!!!!!!!!!!!
+
+```bash
+./src/app/auth/login/ui/LoginForm.tsx:4:10
+Type error: Module '"react-dom"' has no exported member 'useFormState'.
+  2 |
+  3 | import { useEffect } from 'react';
+> 4 | import { useFormState, useFormStatus } from 'react-dom';
+    |          ^
+  5 |
+  6 | import Link from 'next/link';
+  7 | // import { useRouter } from 'next/navigation';
+```
 
 Esto es un E-commers
 

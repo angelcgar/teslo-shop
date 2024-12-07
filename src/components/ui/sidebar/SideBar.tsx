@@ -1,6 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Link from 'next/link';
+
+import { useSession } from 'next-auth/react';
 import clsx from 'clsx';
 import {
 	IoCloseOutline,
@@ -14,9 +18,7 @@ import {
 } from 'react-icons/io5';
 
 import { useUIStore } from '@/store';
-import { useEffect } from 'react';
 import { logout } from '@/actions';
-import { useSession } from 'next-auth/react';
 
 export const Sidebar = () => {
 	const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen);
@@ -27,20 +29,19 @@ export const Sidebar = () => {
 	const isAdmin = session?.user.role === 'admin';
 
 	// todo: Sacar es useEffect a un customHook como ejercisio
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-	useEffect(() => {
-		const handleKeyDown = (event: { key: string }) => {
-			if (event.key === 'Escape') {
-				closeMenu();
-			}
-		};
+	// useEffect(() => {
+	// 	const handleKeyDown = (event: { key: string }) => {
+	// 		if (event.key === 'Escape') {
+	// 			closeMenu();
+	// 		}
+	// 	};
 
-		window.addEventListener('keydown', handleKeyDown);
+	// 	window.addEventListener('keydown', handleKeyDown);
 
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-		};
-	}, []);
+	// 	return () => {
+	// 		window.removeEventListener('keydown', handleKeyDown);
+	// 	};
+	// }, []);
 
 	return (
 		<div>
