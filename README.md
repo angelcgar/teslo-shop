@@ -21,6 +21,8 @@ Type error: Module '"react-dom"' has no exported member 'useFormState'.
   7 | // import { useRouter } from 'next/navigation';
 ```
 
+El error estara relacionado con biome
+
 Esto es un E-commers
 
 ## Instalacion

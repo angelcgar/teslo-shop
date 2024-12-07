@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useFormStatus } from 'react-dom';
+// import { useFormStatus } from 'react-dom';
 // import { useFormState } from 'react-dom';
 
 import Link from 'next/link';
@@ -74,16 +74,16 @@ export const LoginForm = () => {
 };
 
 function LoginButton() {
-	const { pending } = useFormStatus();
+	// const { pending } = useFormStatus();
 
 	return (
 		<button
 			type="submit"
-			className={clsx({
-				'btn-primary': !pending,
-				'btn-disabled': pending,
-			})}
-			disabled={pending}
+			// className={clsx({
+			// 	'btn-primary': !pending,
+			// 	'btn-disabled': pending,
+			// })}
+			// disabled={pending}
 		>
 			Ingresar
 		</button>
