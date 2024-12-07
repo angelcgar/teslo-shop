@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 
 import Link from 'next/link';
@@ -12,17 +12,20 @@ import { authenticate } from '@/actions';
 
 export const LoginForm = () => {
 	// const router = useRouter();
-	const [state, dispach] = useFormState(authenticate, undefined);
+	const [state, dispatch] = useFormState(authenticate, undefined);
+
+	console.log(state);
 
 	useEffect(() => {
 		if (state === 'Success') {
+			// redireccionar
 			// router.replace('/');
 			window.location.replace('/');
 		}
 	}, [state]);
 
 	return (
-		<form action={dispach} className="flex flex-col">
+		<form action={dispatch} className="flex flex-col">
 			<label htmlFor="email">Correo electrónico</label>
 			<input
 				className="px-5 py-2 mb-5 bg-gray-200 border rounded"
@@ -40,17 +43,22 @@ export const LoginForm = () => {
 			<div
 				className="flex items-end h-8 space-x-1"
 				aria-live="polite"
-				aria-atomic
+				aria-atomic="true"
 			>
 				{state === 'Invalid credentials.' && (
-					<div className="flex flex-row mb-5">
+					<div className="flex flex-row mb-2">
 						<IoInformationOutline className="w-5 h-5 text-red-500" />
-						<p className="text-sm text-red-500">Credenciales invalidas</p>
+						<p className="text-sm text-red-500">
+							Credenciales no son correctas
+						</p>
 					</div>
 				)}
 			</div>
 
-			<LogginButton />
+			<LoginButton />
+			{/* <button type="submit" className="btn-primary">
+        Ingresar
+      </button> */}
 
 			{/* divisor l ine */}
 			<div className="flex items-center my-5">
@@ -66,7 +74,7 @@ export const LoginForm = () => {
 	);
 };
 
-function LogginButton() {
+function LoginButton() {
 	const { pending } = useFormStatus();
 
 	return (
@@ -74,7 +82,7 @@ function LogginButton() {
 			type="submit"
 			className={clsx({
 				'btn-primary': !pending,
-				'btn-disable': pending,
+				'btn-disabled': pending,
 			})}
 			disabled={pending}
 		>
